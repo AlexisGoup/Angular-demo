@@ -7,9 +7,9 @@
         
         <div class="col-sm-3">
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary" (click)="showActive('All')">All</button>
-            <button type="button" class="btn btn-secondary" (click)="showActive('true')">Active</button>
-            <button type="button" class="btn btn-secondary" (click)="showActive('false')">Inactive</button>
+            <button type="button" class="btn btn-secondary" [ngClass]="{'active':isActive === 'All'}" (click)="showActive('All')">All</button>
+            <button type="button" class="btn btn-secondary" [ngClass]="{'active':isActive === 'true'}" (click)="showActive('true')">Active</button>
+            <button type="button" class="btn btn-secondary" [ngClass]="{'active':isActive === 'false'}" (click)="showActive('false')">Inactive</button>
           </div>   
         </div>
         
