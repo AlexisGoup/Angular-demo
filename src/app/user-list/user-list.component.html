@@ -1,0 +1,77 @@
+<div class="container">      
+    <div class="row">
+        <div class="col-sm-5">
+          <p><i class="fa fa-users">
+          </i>({{pagination.totalElement}}) Users</p>
+        </div>
+        
+        <div class="col-sm-3">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary" (click)="showActive('All')">All</button>
+            <button type="button" class="btn btn-secondary" (click)="showActive('true')">Active</button>
+            <button type="button" class="btn btn-secondary" (click)="showActive('false')">Inactive</button>
+          </div>   
+        </div>
+        
+        <div class="col-sm-4">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (input)="search($event)">
+            <button class="btn btn-outline-secondary" type="submit" >Search</button>
+          </form>
+        </div>
+    </div>
+
+    <div class="container">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nat. ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Company</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Birth Date</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <th scope="row">{{ user.id }}</th>
+            <td></td>
+            <td>{{ user.name }}</td> 
+            <td>{{ user.email }}</td>
+            <td>{{ user.company }}</td>
+            <td>{{ user.address | slice:0:10 }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.birthDate | date : 'shortDate'}}</td>
+            <td><img [src]=source style="width: 50px;"/></td>
+            <td >
+              <span *ngIf="user.isActive; else elseBlock" class="badge bg-success text-white">Active</span>
+              <ng-template #elseBlock><span class="badge bg-danger text-white">Inactive</span></ng-template>
+            </td>             
+            <td>
+              <div class="btn-group" role="group" >
+                <a type="button" class="btn btn-info">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a type="button" class="btn btn-danger">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [ngClass]="{'active':pagination.currentPage === page}" (click)="paginate(page)" *ngFor='let page of pages'>
+          <a class="page-link" href="#">{{page}}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
